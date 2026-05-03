@@ -7,7 +7,7 @@ import { getAppDir } from "./app-dir.ts";
 import { readJsonFile, writeJsonFile } from "./fs.ts";
 import { getPackageVersion } from "./version.ts";
 
-const REPO = "stablyai/agent-slack";
+const REPO = "190ml/agent-slack";
 const CHECK_INTERVAL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
 type UpdateCheckCache = {
@@ -112,8 +112,8 @@ export type InstallMethod = "binary" | "npm" | "bun";
 /**
  * Detect how agent-slack was installed so we can use the right update strategy.
  *
- * - "npm"    → running via Node.js (npm install -g agent-slack)
- * - "bun"    → running via Bun runtime (bun install -g agent-slack / bunx)
+ * - "npm"    → running via Node.js (npm install -g @jasontendies/agent-slack-huddle)
+ * - "bun"    → running via Bun runtime (bun install -g @jasontendies/agent-slack-huddle / bunx)
  * - "binary" → standalone compiled binary (GitHub release)
  */
 export function detectInstallMethod(): InstallMethod {
@@ -141,9 +141,9 @@ export function getUpdateCommand(method?: InstallMethod): string {
   const m = method ?? detectInstallMethod();
   switch (m) {
     case "npm":
-      return "npm install -g agent-slack@latest";
+      return "npm install -g @jasontendies/agent-slack-huddle@latest";
     case "bun":
-      return "bun install -g agent-slack@latest";
+      return "bun install -g @jasontendies/agent-slack-huddle@latest";
     case "binary":
       return "agent-slack update";
   }

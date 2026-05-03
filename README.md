@@ -14,19 +14,19 @@ Guiding principle:
 Install via Bun (recommended):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/stablyai/agent-slack/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/190ml/agent-slack/main/install.sh | sh
 ```
 
 OR npm global install (requires Node >= 22.5):
 
 ```bash
-npm i -g agent-slack
+npm i -g @jasontendies/agent-slack-huddle
 ```
 
 OR run via Nix flake:
 
 ```bash
-nix run github:stablyai/agent-slack
+nix run github:190ml/agent-slack
 ```
 
 ## At a glance
@@ -37,6 +37,7 @@ nix run github:stablyai/agent-slack
 - **Write**: reply, edit/delete messages, add reactions (bullet lists auto-render as native Slack rich text)
 - **Channels**: list conversations, create channels, and invite users by id/handle/email
 - **Canvas**: fetch Slack canvases as Markdown
+- **Huddle transcripts**: fetch Slack huddle transcripts from transcript files or AI-notes canvases
 
 ## Agent skill
 
@@ -45,7 +46,7 @@ This repo ships an agent skill at `skills/agent-slack/` compatible with Claude C
 **Install via [skills.sh](https://skills.sh)** (recommended):
 
 ```bash
-npx skills add stablyai/agent-slack
+npx skills add 190ml/agent-slack
 ```
 
 <details>
@@ -95,8 +96,10 @@ agent-slack
 │   ├── preview <trigger-id>       # trigger metadata (no side effects)
 │   ├── get     <id>               # workflow definition + form fields
 │   └── run     <trigger-id>       # trip a workflow trigger
-└── canvas
-    └── get <canvas-url-or-id>     # canvas → markdown
+├── canvas
+│   └── get <canvas-url-or-id>     # canvas → markdown
+└── transcript
+    └── get <target>               # huddle transcript → JSON
 ```
 
 Notes:
@@ -313,7 +316,7 @@ Agents can read those paths directly (e.g. snippets as `.txt`, images as `.png`)
 agent-slack search all "smoke tests failed" --channel "#alerts" --after 2026-01-01 --before 2026-02-01
 
 # Search messages only
-agent-slack search messages "stably ai" --user "@stablyai" --channel general
+agent-slack search messages "shipping labels" --user "@alice" --channel general
 
 # Search files only (downloads files and returns local paths)
 agent-slack search files "testing" --content-type snippet --limit 10
@@ -419,28 +422,20 @@ agent-slack canvas get "https://workspace.slack.com/docs/T123/F456"
 agent-slack canvas get "F456" --workspace "https://workspace.slack.com"
 ```
 
+### Fetch a Huddle Transcript
+
+`transcript get` accepts a Slack huddle transcript file URL/id or a huddle AI-notes canvas URL/id. Canvas inputs are resolved through `files.info` to the underlying `huddle_transcript_file_id`.
+
+```bash
+agent-slack transcript get "https://workspace.slack.com/files/USLACKBOT/F123/huddle_transcript"
+agent-slack transcript get "https://workspace.slack.com/docs/T123/F456" --resolve-users
+agent-slack transcript get "F123" --workspace "https://workspace.slack.com"
+```
+
 ## Developing / Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
-<p align="center">
-  <a href="https://stably.ai">
-    <img src="https://public-artifacts.stably.ai/logo-white-with-bg.png" height="96" alt="Stably">
-  </a>
-</p>
-
-<h3 align="center">
-  <a href="https://stably.ai">Stably</a>
-</h3>
-
-<p align="center">
-  Code. Ship. <s>Test.</s>
-</p>
-
-<p align="center">
-  <a href="https://docs.stably.ai/"><strong>Documentation</strong></a> ·
-  <a href="https://stably.ai/"><strong>Homepage</strong></a>
-</p>
-<br/>
+Forked from [stablyai/agent-slack](https://github.com/stablyai/agent-slack) and distributed under the upstream MIT license.

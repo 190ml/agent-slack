@@ -15,7 +15,8 @@ description: |
   - Discovering and running Slack workflows
   - Managing saved-for-later messages (Later tab)
   - Viewing all unread messages (inbox/unreads view)
-  Triggers: "slack message", "slack thread", "slack URL", "slack link", "read slack", "reply on slack", "search slack", "channel history", "recent messages", "channel messages", "latest messages", "mark as read", "mark read", "slack later", "saved for later", "save for later", "slack unreads", "slack inbox", "unread slack"
+  - Fetching Slack huddle transcripts from transcript files or AI-notes canvases
+  Triggers: "slack message", "slack thread", "slack URL", "slack link", "read slack", "reply on slack", "search slack", "channel history", "recent messages", "channel messages", "latest messages", "mark as read", "mark read", "slack later", "saved for later", "save for later", "slack unreads", "slack inbox", "unread slack", "huddle transcript", "slack transcript"
 ---
 
 # Slack automation with `agent-slack`
@@ -26,9 +27,9 @@ description: |
 
 If `agent-slack` is not found on `$PATH`, install it:
 
-- `curl -fsSL https://raw.githubusercontent.com/stablyai/agent-slack/main/install.sh | sh` (recommended)
-- `npm i -g agent-slack` (requires Node >= 22.5)
-- `nix run github:stablyai/agent-slack -- <args>` (no install needed, prefix all commands)
+- `curl -fsSL https://raw.githubusercontent.com/190ml/agent-slack/main/install.sh | sh` (recommended)
+- `npm i -g @jasontendies/agent-slack-huddle` (requires Node >= 22.5)
+- `nix run github:190ml/agent-slack -- <args>` (no install needed, prefix all commands)
 
 ## CRITICAL: Bash command formatting rules
 
@@ -188,8 +189,8 @@ Prefer channel-scoped search for reliability:
 
 ```bash
 agent-slack search all "smoke tests failed" --channel "alerts" --after 2026-01-01 --before 2026-02-01
-agent-slack search messages "stably test" --user "@alice" --channel general
-agent-slack search messages "stably test" --resolve-users
+agent-slack search messages "shipping labels" --user "@alice" --channel general
+agent-slack search messages "shipping labels" --resolve-users
 agent-slack search files "testing" --content-type snippet --limit 10
 ```
 
@@ -274,10 +275,12 @@ agent-slack unreads --max-messages 5
 agent-slack unreads --include-system
 ```
 
-## Canvas + Users
+## Canvas + Transcripts + Users
 
 ```bash
 agent-slack canvas get "https://workspace.slack.com/docs/T123/F456"
+agent-slack transcript get "https://workspace.slack.com/docs/T123/F456" --resolve-users
+agent-slack transcript get "https://workspace.slack.com/files/USLACKBOT/F123/huddle_transcript"
 agent-slack user list --workspace "https://workspace.slack.com" --limit 100
 agent-slack user get "@alice" --workspace "https://workspace.slack.com"
 ```

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo="stablyai/agent-slack"
+repo="190ml/agent-slack"
 latest_api="https://api.github.com/repos/${repo}/releases/latest"
 
 if ! command -v jq >/dev/null 2>&1; then

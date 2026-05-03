@@ -163,6 +163,17 @@ Common options:
     - `--workspace <url-or-unique-substring>` (required when passing an id and multiple workspaces)
     - `--max-chars <n>` (default `20000`, `-1` unlimited)
 
+## Huddle Transcripts
+
+- `agent-slack transcript get <transcript-file-url-or-id|canvas-url-or-id>`
+  - Accepts direct huddle transcript file IDs/URLs and huddle AI-notes canvas IDs/URLs.
+  - Canvas inputs are resolved through `files.info` to the underlying `huddle_transcript_file_id`.
+  - Options:
+    - `--workspace <url-or-unique-substring>` (required when passing an id and multiple workspaces)
+    - `--max-line-chars <n>` (default `-1`, unlimited)
+    - `--resolve-users` (attach resolved user profiles in `referenced_users`)
+    - `--refresh-users` (implies `--resolve-users` and forces a cache refresh)
+
 ## Workflows
 
 - `agent-slack workflow list <channel> [--workspace <url-or-unique-substring>]` — list workflows bookmarked or featured in a channel

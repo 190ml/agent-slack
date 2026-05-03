@@ -24,7 +24,7 @@ in
     inherit (sources) version;
 
     src = fetchurl {
-      url = "https://github.com/stablyai/agent-slack/releases/download/v${sources.version}/${asset}";
+      url = "https://github.com/190ml/agent-slack/releases/download/v${sources.version}/${asset}";
       inherit hash;
     };
 
@@ -38,7 +38,7 @@ in
 
     meta = {
       description = "Slack automation CLI for AI agents";
-      homepage = "https://github.com/stablyai/agent-slack";
+      homepage = "https://github.com/190ml/agent-slack";
       license = lib.licenses.mit;
       platforms = builtins.attrNames assetBySystem;
       mainProgram = "agent-slack";

@@ -81,7 +81,7 @@ git push origin main --tags
 Users install the binary via:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/stablyai/agent-slack/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/190ml/agent-slack/main/install.sh | sh
 ```
 
-Or download directly from [GitHub Releases](https://github.com/stablyai/agent-slack/releases).
+Or download directly from [GitHub Releases](https://github.com/190ml/agent-slack/releases).

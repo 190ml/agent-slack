@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Manual skill installation script.
-# Prefer: npx skills add stablyai/agent-slack
+# Prefer: npx skills add 190ml/agent-slack
 # See: https://skills.sh
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -34,5 +34,4 @@ install_one "${HOME}/.agents/skills"   # Codex, Gemini CLI, OpenCode
 install_one "${HOME}/.claude/skills"   # Claude Code
 
 echo ""
-echo "Tip: For more agents, use: npx skills add stablyai/agent-slack"
-
+echo "Tip: For more agents, use: npx skills add 190ml/agent-slack"

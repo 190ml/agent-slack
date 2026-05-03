@@ -1,24 +1,26 @@
 {
-  "name": "agent-slack",
-  "version": "0.9.1",
+  "name": "@jasontendies/agent-slack-huddle",
+  "version": "0.9.2",
   "description": "Slack automation CLI for AI agents",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stablyai/agent-slack.git"
+    "url": "git+https://github.com/190ml/agent-slack.git"
   },
   "bin": {
-    "agent-slack": "./bin/agent-slack.js"
+    "agent-slack": "bin/agent-slack.js"
   },
   "files": [
     "dist",
     "bin/agent-slack.js",
+    "skills",
     "README.md",
     "LICENSE"
   ],
   "type": "module",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "clean": "rm -rf dist",

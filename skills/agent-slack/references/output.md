@@ -32,6 +32,15 @@ This behavior is opt-in and requires passing the `--resolve-users` flag (or `--r
 
 Use `--max-body-chars` to cap message bodies for token budget control.
 
+## Huddle transcript shape
+
+- `transcript get` returns:
+  - `transcript: { file_id, title?, channel_id?, date_start?, date_end?, transcription_time_ranges?, line_count, lines }`
+  - `transcript.lines[]: { line_id, user_id?, start_time_ms?, start_time?, contents }`
+  - `referenced_users?: { [user_id]: { id, name?, real_name?, display_name?, ... } }` when `--resolve-users` or `--refresh-users` is passed
+
+`transcript get` uses Slack's huddle transcript fetch path through `files.info` with transcript inclusion enabled. It accepts either the transcript file itself or the huddle AI-notes canvas that points at the transcript file.
+
 ## Later shape (high-level)
 
 - `later list` returns:
